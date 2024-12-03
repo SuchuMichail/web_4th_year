@@ -1,0 +1,33 @@
+html{
+    height: 100%;
+}
+
+body{
+    background: linear-gradient(to top left,green, blue, red);
+}
+
+#parent{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#timeNow{
+    color: aliceblue;
+    font-size: 10vh;
+    display: flex;
+}
+
+#dateNow{
+    color: aliceblue;
+    font-size: 5vh;
+    display: flex;
+}
+
+button{
+    font-size: large;
+}

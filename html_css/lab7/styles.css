@@ -1,0 +1,30 @@
+#c0 {
+    left: 100px;
+    top: 100px;
+}
+
+#c0, .circle {
+    position: absolute;
+    border: 0.1875em solid #0F1C3F;
+    border-radius: 50%;
+    transition-property: width, height, background-color, left, top;
+    transition-duration: 1s;
+}
+
+.blue_circle {
+    background-color: #456BD9;
+    height: 50px;
+    width: 50px;
+}
+
+.red_circle {
+    background-color: #cf2828;
+    height: 100px;
+    width: 100px;
+}
+
+.inherit_circle {
+    background-color: inherit;
+    height: 50px;
+    width: 50px;
+}

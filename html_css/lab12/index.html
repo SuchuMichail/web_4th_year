@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>This is the title</title>
+        <link rel="stylesheet" href="styles.css">
+	</head>
+    <body style="margin: 0;">
+        <div id="calculator">
+            <input type="text" id="display" disabled>
+            <br>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="cos()">cos</button>
+            <button onclick="sin()">sin</button>
+            <button onclick="tg()">tg</button>
+            <button onclick="ctg()">ctg</button>
+            <br>
+            <button onclick="addToDisplay('&#8730')">&#8730</button>
+            <button onclick="clearLastSymbol()">&#8592</button>
+            <button onclick="addToDisplay('&#40')">&#40</button>
+            <button onclick="addToDisplay('&#41')">&#41</button>
+            <button onclick="addToDisplay('/')">/</button>
+            <br>
+            <button onclick="sqrtN()">^(1/n)</button>
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <button onclick="addToDisplay('*')">*</button>
+            <br>
+            <button onclick="powerTwo()">^2</button>
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <button onclick="addToDisplay('-')">-</button>
+            <br>
+            <button onclick="powerN()">^n</button>
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+            <button onclick="addToDisplay('+')">+</button>
+            <br>
+            <button onclick="addToDisplay('e')">e</button>
+            <button onclick="addToDisplay('&#960')">&#960</button>
+            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="addToDisplay('.')">.</button>
+            <button onclick="calculateResult()">=</button>
+        </div>
+
+        <script>
+            let display = document.getElementById("display");
+            
+            function clearDisplay() {
+                display.value = '';
+            }
+
+            function calculateResult() {
+                try {
+                    let str = display.value;
+                    let result = '';
+                    
+                    for(let i = 0; i < str.length; i++){
+                        if(str[i] == 'e'){
+                            result = result + Math.E;
+                        }
+                        else if(str[i].charCodeAt(0) == '960'){
+                            result = result + Math.PI;
+                        }
+                        else if(str[i] == '^' || str[i].charCodeAt(0) == '8730'){
+                            let iter = i - 1;
+                            let before = '';
+                            let after = '';
+
+                            if(str[iter] == ')'){
+                                iter--;
+                                while(iter >= 0 && str[iter] != '('){
+                                    if(str[iter] == 'e'){
+                                        before = Math.E + before;
+                                    }
+                                    else if(str[iter].charCodeAt(0) == '960'){
+                                        before = Math.PI + before;
+                                    }
+                                    else{
+                                        before = str[iter] + before;
+                                    }
+                                    iter--;
+                                }
+                                before = eval(before)
+                            }
+                            else{
+                                while(iter >= 0 && str[iter] != '+' && str[iter] != '-' && str[iter] != '*' && str[iter] != '/'){
+                                    if(str[iter] == 'e'){
+                                        before = Math.E + before;
+                                    }
+                                    else if(str[iter].charCodeAt(0) == '960'){
+                                        before = Math.PI + before;
+                                    }
+                                    else{
+                                        before = str[iter] + before;
+                                    }
+                                    iter--;
+                                }
+                            }
+                            result = result.slice(0, iter + 1);
+                            console.log(result)
+                            
+                            iter = i + 1;
+
+                            while(iter != str.length && str[iter] != ')'){
+                                if(str[iter] == 'e'){
+                                    after = after + Math.E;
+                                }
+                                else if(str[iter].charCodeAt(0) == '960'){
+                                    after = after + Math.PI;
+                                }
+                                else{
+                                    after = after + str[iter];
+                                }
+                                iter++;
+                            }
+
+                            let flag_n_sqrt = false;
+                            if(str[i] == '^' && iter + 1 < str.length && str[iter] == '/'){
+                                flag_n_sqrt = true;
+                                after = '';
+                                iter++;
+                                while(iter != str.length && str[iter] != ')'){
+                                    if(str[iter] == 'e'){
+                                        after = after + Math.E;
+                                    }
+                                    else if(str[iter].charCodeAt(0) == '960'){
+                                        after = after + Math.PI;
+                                    }
+                                    else{
+                                        after = after + str[iter];
+                                    }
+                                    iter++;
+                                }
+                            }
+
+                            if(after[0] == '('){
+                                after = after.slice(1);
+                            }
+
+                            result = result.slice(0, i - before.length)
+
+
+                            console.log("before = " + before)
+                            console.log("after = " + after)
+
+                            after = eval(after)
+
+                            if(flag_n_sqrt){
+                                result = result.toString() + Math.pow(Number(before), Number(1/after));
+                            }
+
+                            else if(str[i] == '^'){
+                                result = result.toString() + Math.pow(Number(before), Number(after));
+                            }
+                            
+                            else if(str[i].charCodeAt(0) == '8730'){
+                                result = result.toString() + Math.sqrt(Number(after));
+                            }
+
+                            i = iter;
+                        }
+
+                        else if(i + 2 < str.length && str[i] == 's' && str[i + 1] == 'i' && str[i + 2] == 'n' ||
+                                i + 2 < str.length && str[i] == 'c' && str[i + 1] == 'o' && str[i + 2] == 's' ||
+                                i + 2 < str.length && str[i] == 'c' && str[i + 1] == 't' && str[i + 2] == 'g' ||
+                                i + 1 < str.length && str[i] == 't' && str[i + 1] == 'g'){
+                            let flag_sin = false, flag_cos = false, flag_ctg = false, flag_tg = false;
+                            if(i + 2 < str.length && str[i] == 's' && str[i + 1] == 'i' && str[i + 2] == 'n'){
+                                flag_sin = true;
+                            }
+                            else if(i + 2 < str.length && str[i] == 'c' && str[i + 1] == 'o' && str[i + 2] == 's'){
+                                flag_cos = true;
+                            }
+                            else if(i + 2 < str.length && str[i] == 'c' && str[i + 1] == 't' && str[i + 2] == 'g'){
+                                flag_ctg = true;
+                            }
+                            else if(i + 1 < str.length && str[i] == 't' && str[i + 1] == 'g'){
+                                flag_tg = true;
+                            }
+
+                            let iter = i + 3;
+                            let after = '';
+                            
+                            while(iter != str.length && str[iter] != ')'){
+                                if(str[iter] == 'e'){
+                                    after = after + Math.E;
+                                }
+                                else if(str[iter].charCodeAt(0) == '960'){
+                                    after = after + Math.PI;
+                                }
+                                else{
+                                    after = after + str[iter];
+                                }
+                                iter++;
+                            }
+                            result = result.slice(0, i);
+
+                            if(!flag_tg){
+                                after = after.slice(1);
+                            }
+
+                            after = eval(after);
+
+                            if(flag_sin){
+                                result = result.toString() + Math.sin(after);
+                            }
+                            else if(flag_cos){
+                                result = result.toString() + Math.cos(after);
+                            }
+                            else if(flag_ctg){
+                                result = result.toString() + (1 / Math.tan(after));
+                            }
+                            else if(flag_tg){
+                                result = result.toString() + Math.tan(after);
+                            }
+
+                            i = iter;
+                        }
+
+                        else{
+                            result = result + str[i];
+                        }
+                    }
+                    
+                    //display.value = result;
+                    display.value = eval(result);
+                } catch (error) {
+                    display.value = 'Error';
+                    console.log(error)
+                }
+            }
+
+            function addToDisplay(value) {
+                display.value += value;
+            }
+
+            function clearLastSymbol(){
+                display.value = display.value.slice(0, -1);
+            }
+            
+            function powerTwo(){
+                display.value += "^(2)";
+            }
+
+            function powerN(){
+                display.value += "^(";
+            }
+
+            function sqrtN(){
+                display.value += "^(1/";
+            }
+
+            function sin(){
+                display.value += "sin(";
+            }
+            function cos(){
+                display.value += "cos(";
+            }
+            function tg(){
+                display.value += "tg(";
+            }
+            function ctg(){
+                display.value += "ctg(";
+            }
+        </script>
+    </body>
+</html>

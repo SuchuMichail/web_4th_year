@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>This is the title</title>
+        <link rel="stylesheet" href="styles.css">
+	</head>
+    <body>
+		<div id="c0" class="circle blue_circle" onclick="changeCounterFirstCircle()"></div>
+
+		<script>
+			let last_left, last_top;
+
+			let click_counters = [];
+
+			click_counters[0] = 0;
+
+			function changeCounterFirstCircle(){
+				changeCounter('c0');
+			}
+			
+			function changeCounter(circle_id){
+				let circle = document.getElementById(circle_id);
+
+				if(circle_id=='c0'){
+					circle.style.left = 100 + 'px';
+					circle.style.top = 100 + 'px';
+				}
+
+				let c_i = parseInt(circle_id.slice(1));
+
+				click_counters[c_i]++;
+
+				let click_counter = click_counters[c_i];
+
+				if(click_counter === 1){
+					if(circle.classList.contains('blue_circle')){
+						circle.classList.remove('blue_circle');
+					}
+					circle.classList.add('red_circle');
+				}
+				if(click_counter === 2){
+					circle.classList.remove('red_circle');
+					circle.classList.add('blue_circle');
+				}
+				if(click_counter === 3){
+					circle.classList.remove('blue_circle');
+					circle.classList.add('inherit_circle');
+				}
+				if(click_counter === 4){
+					last_left = parseInt(circle.style.left);
+					last_top = parseInt(circle.style.top);
+					circle.remove();
+				}
+			}
+
+			let counter_of_circles = 1;
+
+			function createCircle(left, top){
+				let div = document.createElement('div');
+
+				div.id = "c" + counter_of_circles;
+				click_counters[counter_of_circles] = 0;
+
+				div.classList.add("circle");
+				div.classList.add("blue_circle");
+				div.style.left = left + 'px';
+				div.style.top = top + 'px';
+				document.body.append(div);
+
+				div.addEventListener("click", () => changeCounter(div.id));
+
+				counter_of_circles++;
+			}
+
+
+			document.addEventListener("click", function(event){
+				if(!event.target.classList.contains("circle")){
+					createCircle(event.pageX, event.pageY);
+				}
+			});
+		</script>
+	</body>
+</html>

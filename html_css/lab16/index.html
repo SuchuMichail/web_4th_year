@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>This is the title</title>
+        <link rel="stylesheet" href="styles.css">
+	</head>
+    <body style="margin: 0;">
+        <div id="pin">
+            <div id="title_div">Enter PIN Code</div>
+            <br>
+            <input type="text" id="first_display" class="display" disabled>
+            <br>
+            <input type="text" id="second_display" class="display" disabled>
+            <br>
+            <button onclick="addToDisplay('7')">7</button>
+            <button onclick="addToDisplay('8')">8</button>
+            <button onclick="addToDisplay('9')">9</button>
+            <br>
+            <button onclick="addToDisplay('4')">4</button>
+            <button onclick="addToDisplay('5')">5</button>
+            <button onclick="addToDisplay('6')">6</button>
+            <br>
+            <button onclick="addToDisplay('1')">1</button>
+            <button onclick="addToDisplay('2')">2</button>
+            <button onclick="addToDisplay('3')">3</button>
+            <br>
+            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="clearLastSymbol()">&#8592</button>
+            <button onclick="enter()">Enter</button>
+            <br>
+            <div id="enter_div" class="hide"></div>
+        </div>
+        <script>
+            const pin_length = 6;
+            let first_display = document.getElementById("first_display");
+            let second_display = document.getElementById("second_display");
+            let enter_div = document.getElementById("enter_div");
+
+            let first_display_string = '';
+            let second_display_string = '';
+            let id_display = 0;
+
+            function addToDisplay(value){
+                if(id_display === 0){
+                    first_display_string += value;
+                    first_display.value += '*';
+                }
+                else{
+                    second_display_string += value;
+                    second_display.value += '*';
+                }
+                enter_div.classList.add("hide");
+            }
+
+            function clearLastSymbol(){
+                if(id_display === 0){
+                    first_display.value = first_display.value.slice(0, -1);
+                    first_display_string = first_display_string.slice(0, -1);
+                }
+                else{
+                    second_display.value = second_display.value.slice(0, -1);
+                    second_display_string = second_display_string.slice(0, -1);
+                }
+                enter_div.classList.add("hide");
+            }
+
+            function enter(){
+                if(id_display === 0){
+                    if(first_display.value.length !== pin_length){
+                        enter_div.textContent = "PIN length must be 6";
+                        enter_div.classList.remove("green_text");
+                        enter_div.classList.add("red_text");
+                    }
+                    else{
+                        id_display++;
+                        enter_div.textContent = "PIN has saved. Repeat enter."
+                        enter_div.classList.remove("red_text");
+                        enter_div.classList.add("green_text");
+                    }
+                }
+                else{
+                    if(second_display.value.length !== pin_length){
+                        console.log(second_display.value.length)
+                        enter_div.textContent = "PIN length must be 6";
+                        enter_div.classList.remove("green_text");
+                        enter_div.classList.add("red_text");
+                    }
+                    else if(first_display_string == second_display_string){
+                        enter_div.textContent = "Success";
+                        enter_div.classList.remove("red_text");
+                        enter_div.classList.add("green_text");
+                    }
+                    else{
+                        enter_div.textContent = "Second PIN != First PIN. Remember First PIN and write it.";
+                        enter_div.classList.remove("green_text");
+                        enter_div.classList.add("red_text");
+                    }
+                }
+                enter_div.classList.remove("hide");
+            }
+        </script>
+    </body>
+</html>

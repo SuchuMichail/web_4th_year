@@ -1,0 +1,98 @@
+html{
+    background-color: rgb(30, 3, 3);
+}
+
+.slider-container{
+    top: 20px;
+    max-width: 50%;
+    position: relative;
+    margin: auto;
+    height: 600px;
+
+}
+
+.slider-container .item img {
+    object-fit: cover;
+    width: 100%;
+    height: 600px;
+}
+
+.slider-container .previous, .slider-container .next {
+    /* Добавляет курсору иконку, когда тот оказывается над кнопкой: */
+    cursor: pointer;
+    /* Положение элемента задаётся относительно границ браузера: */
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    /* Оформление самих кнопок: */
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    /* Плавное появление фона при наведении курсора: */
+    transition: 0.6s ease;
+    /* Скругление границ: */
+    border-radius: 0 3px 3px 0;
+}
+
+.slider-container .next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* При наведении курсора на кнопки добавляем фон кнопок: */
+.slider-container .previous:hover,
+.slider-container .next:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Анимация слайдов: */
+.slider-container .item {
+    animation-name: fade;
+    animation-duration: 1.7s;
+}
+@keyframes fade {
+    /* Устанавливаем и изменяем степень прозрачности: */
+    from {
+        opacity: 0.2
+    }
+    to {
+        opacity: 1
+    }
+}
+
+
+
+/* индикаторы */
+.indicators-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    margin: 0 15%;
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .indicator {
+    flex: 0 1 auto;
+    box-sizing: content-box;
+    width: 30px;
+    height: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    background-color: rgb(255 255 255 / 50%);
+    background-clip: padding-box;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    cursor: pointer;
+  }
+  
+  .indicator-active {
+    background-color: rgb(255 255 255 / 90%);
+  }

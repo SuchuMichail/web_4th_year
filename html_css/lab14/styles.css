@@ -1,0 +1,63 @@
+#div_table{
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+#div_winners{
+    font-size: xx-large;
+    text-align: center;
+}
+#div_now_winner{
+    font-size: xx-large;
+    text-align: center;
+}
+
+table{
+    border-spacing: 0;
+    border-collapse: collapse;
+    /* height: 50%; */
+}
+
+.table_center{
+    margin: 0 auto;
+}
+
+td{
+    border: 2px solid black;
+    font-size: 0px;
+    margin: 0; 
+    padding: 0;
+    width: 100px;
+    height: 100px;
+}
+
+img{
+    width: 100px;
+    height: 100px;
+}
+
+#button{
+    font-size: x-large;
+}
+
+.hide {
+    display: none;
+}
+
+.hutao{
+
+}
+
+.yae{
+
+}
+
+.nobody{
+
+}
+
+.noclickable{
+
+}

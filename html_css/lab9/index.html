@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>This is the title</title>
+        <link rel="stylesheet" href="styles.css">
+	</head>
+    <body style="margin: 0;">
+        <div id="parent">
+            <div id="timeNow"></div>
+            <div id="dateNow"></div>
+            <div id="tableDiv">
+                <table>
+                    <tr>
+                        <td><button onclick="changeTimeZone('Europe/Moscow')">Москва</button></td>
+                        <td><button onclick="changeTimeZone('Japan')">Токио</button></td>
+                        <td><button onclick="changeTimeZone('America/New_York')">Нью-Йорк</button></td>
+                        <td><button onclick="changeTimeZone('Asia/Omsk')">Омск</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            var time_zone = "Asia/Omsk";
+            var options_date = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+                timeZone: time_zone
+            };
+            var options_time = {
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric',
+                timeZone: time_zone
+            }
+            function changeTimeZone(timezone){
+                time_zone = timezone;
+                options_time.timeZone = time_zone;
+                options_date.timeZone = time_zone;
+            }
+
+            let timeNow = document.getElementById('timeNow');
+            let dateNow = document.getElementById('dateNow');
+            /*setInterval(function(){
+                let today = new Date();
+
+                timeNow.innerText = today.toLocaleString("ru", options_time);
+                dateNow.innerText = today.toLocaleString("ru", options_date);
+            }, 500);*/
+
+            setTimeout(function run(){
+                let today = new Date();
+
+                timeNow.innerText = today.toLocaleString("ru", options_time);
+                dateNow.innerText = today.toLocaleString("ru", options_date);
+                setTimeout(run, 500);
+            }, 500);
+        </script>
+    </body>
+</html>

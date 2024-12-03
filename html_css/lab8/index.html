@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>This is the title</title>
+        <link rel="stylesheet" href="styles.css">
+	</head>
+    <body style="margin: 0;">
+        <script>
+            function getRandomNumber(min, max) {
+                let rand = min + Math.random() * (max + 1 - min);
+                return Math.floor(rand);
+            }
+
+            function makeClick(event){
+                let img = event.target;
+        
+                console.log("img id = " + img.src + img.classList)
+                console.log()
+                
+                if(img.classList.contains('transformed90')){
+                    img.classList.remove('transformed90');
+
+                    img.classList.add('transformed180');
+                }
+                else if(img.classList.contains('transformed180')){                        
+                    img.classList.remove('transformed180');
+
+                    img.classList.add('transformed270');
+                }
+                else if(img.classList.contains('transformed270')){
+                    img.classList.remove('transformed270');
+
+                    img.classList.add('transformed0');
+
+                    let transformed_images = document.querySelectorAll(".transformed0");
+                    if(transformed_images.length === 9){
+                        let div_text = document.createElement("div");
+                        div_text.id = "div_text";
+                        div_text.textContent = "Конец!";
+                        document.body.append(div_text);
+
+
+                        let button = document.createElement("button");
+                        button.id = "button";
+                        button.textContent = "Начать сначала";
+            
+                        button.addEventListener("click", startGame);
+                        document.body.append(button);
+                    }
+                }
+            }
+
+            function startGame(){
+                //document.removeEventListener("click", makeClick);
+                document.body.innerHTML = '';
+                //window.location.reload();
+
+                let div_table = document.createElement("div");
+                div_table.id = "div_table";
+
+                let table = document.createElement("table");
+                table.classList.add("table_center");
+                for(let i = 0; i < 3; i++){
+                    let tr = document.createElement("tr");
+                    for(let j = 0; j < 3; j++){
+                        let td = document.createElement("td");
+                        let img = document.createElement("img");
+                        img.src = (i*3 + j + 1) + ".jpg";
+
+                        let transform_position = getRandomNumber(0,2);
+                        if(transform_position === 0){
+                            img.classList.add("transformed90");
+                        }
+                        else if(transform_position === 1){
+                            img.classList.add("transformed180");
+                        }
+                        else if(transform_position === 2){
+                            img.classList.add("transformed270");
+                        }
+
+                        console.log("img = " + img.src + img.classList)
+                        console.log();
+
+                        td.append(img);
+                        tr.append(td);
+                    }
+                    table.append(tr);
+                }
+                div_table.append(table);
+                document.body.append(div_table);
+            }
+            
+            document.addEventListener("click", makeClick);
+            
+            startGame();
+        </script>
+    </body>
+</html>

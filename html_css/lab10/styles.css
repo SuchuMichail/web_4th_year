@@ -1,0 +1,52 @@
+html{
+    height: 100%;
+}
+
+body{
+    background: linear-gradient(to top left,green, blue, red);
+}
+
+#container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#parent{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#timer{
+    color: aliceblue;
+    font-size: 10vh;
+    display: flex;
+}
+
+button{
+    font-size: large;
+}
+
+#history_container{
+    font-size: x-large;
+    color: rgb(158, 234, 242);
+    display: flex;
+    flex-direction: column;
+}
+
+#history{
+    
+}
+
+.timerOn{
+
+}
+
+.timerOff{
+
+}

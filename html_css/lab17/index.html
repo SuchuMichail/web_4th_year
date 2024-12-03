@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta charset="utf-8">
+		<title>This is the title</title>
+        <link rel="stylesheet" href="styles.css">
+	</head>
+    <body style="margin: 0;">
+        <div id="container">
+            <div id="sphere_container">
+                <div id="text_sphere"></div>
+                <div id="img_div">
+                    <img src="17.png"/>
+                </div>
+            </div>
+            <input id="input" type="text" />
+            <div id="div_buttons">
+                <button id="clear" onclick="clearInput()"></button>
+                <button id="ask" onclick="showAnswer()"></button>
+            </div>
+        </div>
+        <script>
+            let input_text = document.getElementById("input");
+            let sphere = document.getElementById("text_sphere");
+            let button_clear = document.getElementById("clear");
+            let button_ask = document.getElementById("ask");
+
+            button_clear.textContent = "Очистить";
+            button_ask.textContent = "Спросить";
+
+            const answers = [
+                "Насколько<br>я вижу<br>да",
+                "Спроси<br>позже",
+                "Лучше сейчас<br>не говорить<br>тебе",
+                "Не могу<br>сейчас<br>сказать",
+                "Соберись<br>с мыслями<br>и спроси<br>снова", "Не рассчитывай<br>на это", "Я так<br>не думаю", "Я сомневаюсь<br>насчёт<br>этого", "Это<br>бесспорно", "Да<br>это так", "Может<br>быть", "Наиболее<br>вероятно", "Мои<br>источники<br>говорят<br>нет", "Мои<br>источники<br>говорят<br>да", "НЕТ!", "Перспектива<br>хорошая", "Перспектива<br>не очень<br>хорошая", "Будущее<br>туманно<br>спроси<br>позже", "Знаки<br>указывают<br>что<br>да", "Знаки<br>указывают<br>что<br>нет", "Извини,<br>нет", "Очень<br>сомневаюсь", "Без сомнения", "ДА!", "Определённо<br>да", "Ты можешь<br>надеяться<br>на это"];
+            
+            function showAnswer() {
+                const r = Math.floor(Math.random() * answers.length);
+                sphere.innerHTML = answers[r];
+            }
+
+            function clearInput(){
+                input_text.value = '';
+            }
+        </script>
+    </body>
+</html>

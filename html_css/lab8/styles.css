@@ -1,0 +1,57 @@
+html{
+    background-color: black;
+}
+
+#div_table{
+    margin-top: 10px;
+}
+#table{
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+#div_text{
+    font-size: xx-large;
+    color: antiquewhite;
+    text-align: center;
+}
+
+#button{
+    font-size: xx-large;
+    color: antiquewhite;
+    background-color: dimgray;
+}
+
+.table_center{
+    /* border: 1px solid #000; */
+    margin: 0 auto;
+}
+
+td{
+    /* width: 100px;  */
+    /* height: fit-content; */
+    border: 0px solid black;
+    font-size: 0px;
+    margin: 0; 
+    padding: 0;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+}
+
+.transformed0{
+    transform: rotate(0deg);
+}
+
+.transformed90 {
+    transform: rotate(90deg);
+}
+
+.transformed180{
+    transform: rotate(180deg);
+}
+
+.transformed270{
+    transform: rotate(270deg);
+}
